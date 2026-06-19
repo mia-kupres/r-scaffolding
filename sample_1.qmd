@@ -1,0 +1,50 @@
+---
+title: "Quarto example"
+author: "Mia Kupres"
+format:
+  html:
+    toc: true
+    code-fold: false
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Setup
+
+This is a small Quarto example using built-in R data.
+
+```{r}
+data(mtcars)
+head(mtcars)
+```
+
+## Summary Statistics
+
+```{r}
+summary(mtcars[, c("mpg", "wt", "hp")])
+```
+
+## Simple Plot
+
+```{r}
+plot(
+    mtcars$wt,
+    mtcars$mpg,
+    main = "Miles Per Gallon vs Vehicle Weight",
+    xlab = "Weight (1000 lbs)",
+    ylab = "Miles per Gallon",
+    pch = 19,
+    col = "steelblue"
+)
+```
+
+## Regression Model
+
+```{r}
+model <- lm(mpg ~ wt, data = mtcars)
+summary(model)
+```
+
+The fitted slope is `r round(coef(model)[["wt"]], 3)`, so the estimated miles per gallon decreases as vehicle weight increases.

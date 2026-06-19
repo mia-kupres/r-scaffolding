@@ -1,0 +1,15 @@
+Package: getstarted
+  Version: 0.0.0
+  Authors@R: person("Mia", "Kupres", email = "miakupres@tamu.edu", role = c("aut", "cre"))
+  Description: Project dependencies for R Supplement of Time Series Analysis and Applications Using the R Statistical Package.
+  License: MIT
+  Encoding: UTF-8
+  Imports:
+      ggplot2,
+      dplyr,
+      readr
+  Suggests:
+      languageserver
+      yaml
+      knitr
+      rmarkdown

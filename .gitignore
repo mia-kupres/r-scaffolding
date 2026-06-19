@@ -1,0 +1,35 @@
+# R session files
+.Rhistory
+.RData
+.Ruserdata
+
+# R package build artifacts
+*.tar.gz
+*.Rcheck/
+
+# renv local state
+renv/library/
+renv/local/
+renv/python/
+renv/staging/
+
+# Quarto/R Markdown render artifacts
+*_files/
+*_cache/
+.quarto/
+.quarto_cache/
+
+# Common generated document outputs
+*.html
+*.pdf
+*.docx
+
+# VS Code local settings
+.vscode/*
+!.vscode/settings.json
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
