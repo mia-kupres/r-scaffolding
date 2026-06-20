@@ -1,0 +1,149 @@
+---
+title: "R Basics"
+author: "Mia Kupres"
+format:
+  html:
+    toc: true
+    code-fold: false
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Addition
+```{r}
+2 + 2
+```
+## Multiplication and Addition
+```{r}
+5 * 5 + 2
+```
+# division and subtraction
+```{r}
+5 / 5 - 3
+```
+# log, exponential, pi
+```{r}
+log(exp(pi))
+```
+
+# sinusoids
+```{r}
+sin(pi/2) 
+```
+# power
+```{r}
+exp(1)^(-2) 
+```
+# square root
+```{r}
+sqrt(8)
+```
+# sequences
+```{r}
+1:5
+```
+# sequences
+```{r}
+seq(1, 10, by=2)
+```
+# repeat 2 three times
+
+```{r}
+rep(2, 3) 
+```
+## Next, we’ll use assignment to make some objects:
+# put 1 + 2 in object x
+```{r}
+x <- 1 + 2 
+```
+# same as above with fewer keystrokes
+```{r}
+x = 1 + 2
+```
+# same
+```{r}
+1 + 2 -> x
+```
+# view object x
+```{r}
+x
+```
+
+# put 9 times 3 in y and view the result
+```{r}
+(y = 9 * 3)
+```
+
+# put 5 standard normals into z and print z
+```{r}
+(z = rnorm(5))
+```
+
+## It is worth pointing out R’s recycling rule for doing arithmetic. In the code below,c() [concatenation] is used to create a vector. Note the use of the semicolon for multiple commands on one line.
+```{r}
+x = c(1, 2, 3, 4); y = c(2, 4, 6, 8); z = c(10, 20); w = c(8, 3, 2)
+```
+
+# 1*2, 2*4, 3*6, 4*8
+```{r}
+x * y
+```
+
+# 1+10, 2+20, 3+10, 4+20
+```{r}
+x + z
+```
+# what happened here?
+```{r}
+y + w 
+```
+# To work your objects, use the following commands:
+```{r}
+ls() # list all objects
+```
+# list every object that contains "my"
+```{r}
+ls(pattern = "m") 
+```
+# list of available data sets
+```{r}
+data()
+```
+# remove object "dummy"
+```{r}
+rm(dummy) 
+```
+# remove almost everything (use with caution)
+```{r}
+rm(list=ls()) 
+```
+# html help and documentation
+```{r}
+help.start() 
+```
+# specific help (?exp is the same)
+```{r}
+help(exp) 
+```
+# get working directory
+```{r}
+getwd()
+```
+# change working directory
+```{r}
+setwd()
+```
+# end the session (keep reading)
+```{r}
+q()
+```
+```{r}
+```
+```{r}
+```
+```{r}
+```
+```{r}
+```

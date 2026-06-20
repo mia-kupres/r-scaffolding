@@ -7,7 +7,8 @@ Package: getstarted
   Imports:
       ggplot2,
       dplyr,
-      readr
+      readr,
+      astsa
   Suggests:
       languageserver
       yaml
