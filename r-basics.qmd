@@ -139,11 +139,149 @@ setwd()
 ```{r}
 q()
 ```
+To create your own data set, you can make a data vector as follows:
 ```{r}
+mydata = c(1,2,3,2,1)
+```
+# Now you have an object called mydata that contains five elements. R calls these objects vectors even though they have no dimensions (no rows, no columns); they do have order and length:
+
+# display the data
+```{r}
+mydata
+```
+# the third element
+```{r}
+mydata[3]
+```
+# elements three through five
+```{r}
+mydata[3:5]
+```
+# everything except the first two elements
+```{r}
+mydata[-(1:2)]
+```
+# number of elements
+```{r}
+length(mydata)
+```
+# no dimensions
+```{r}
+dim(mydata)
+```
+# make it a matrix
+```{r}
+mydata = as.matrix(mydata)
+```
+# now it has dimensions
+```{r}
+dim(mydata)
+```
+# If you have an external data set, you can use scan or read.table (or some variant) to input the data. For example, suppose you have an ascii (text) data file called dummy.txt in your working directory, and the file looks like this:
+```{r}
+((dummy = scan("dummy.txt")))
 ```
 ```{r}
+((dummy = read.table("dummy.txt")))
+```
+# There is a difference between scan and read.table. The former produced a data vector of 10 items while the latter produced a data frame with names V1 to V5 and two observations per variate. In this case, if you want to list (or use) the second variate, V2, you would use
+```{r}
+dummy$V2
 ```
 ```{r}
+?scan
+```
+
+```{r}
+?read.table
+```
+## Data frames (?data.frame) are “used as thefundamental data structure by most of R’s modeling software.” Notice that R gave the columns of dummy generic names, V1, ..., V5. You can provide your own names and then use the names to access the data without the use of $ as above.
+```{r}
+names(dummy) = c("Dog", "Cat", "Rat", "Pig", "Man")
+dummy
+attach(dummy)
+Cat
+```
+
+# view the first few lines of a data file
+```{r}
+head(dummy)
+```
+# clean up (if desired)
+```{r}
+detach(dummy)
+```
+
+```{r}
+Rat*(Pig-Man)
+```
+# You may also include a header in the data file to avoid colnames(). For example, if you have a comma separated values file dummy.csv that looks like this,
+# Dog,Cat,Rat,Pig,Man
+# 1,2,3,2,1
+# 9,0,2,1,0
+# then use the following command to read the data.
+```{r}
+dummy = read.csv("dummy.csv")
+dummy
+```
+# Two commands that are used frequently to manipulate data are cbind for column binding and rbind for row binding. The following is an example.
+
+```{r}
+x = runif(4) # generate 4 values from a uniform(0,1) into object x
+y = runif(4) # generate 4 more and put them into object y
+(u = cbind(x,y)) # column bind the two vectors (4 by 2 matrix)
+```
+# row bind the two vectors (2 by 4 matrix)
+```{r}
+(u = rbind(x,y))
+```
+
+# Summary statistics are fairly easy to obtain. We will simulate 25 normals with μ = 10 and s = 4 and then perform some basic analyses. The first line of the code is set.seed, which fixes the seed for the generation of pseudorandom numbers. Using the same seed yields the same results; to expect anything else would be insanity.
+
+```{r}
+set.seed(90210) # so you can reproduce these results
+x = rnorm(25, 10, 4) # generate the data
 ```
 ```{r}
+c( mean(x), median(x), var(x), sd(x) )
+```
+```{r}
+c( min(x), max(x) ) # smallest and largest values
+```
+
+# index of the max (x[25] in this case)
+```{r}
+which.max(x)
+```
+# a five number summary with six numbers
+```{r}
+summary(x)
+```
+
+ # visual summaries (not shown)
+```{r}
+boxplot(x); hist(x); stem(x)
+```
+# It can’t hurt to learn a little about programming in R because you will see some of it along the way. Consider a simple program that we will call crazy to produce a graph of a sequence of sample means of increasing sample sizes from a Cauchy distribution with location parameter zero.
+```{r}
+boxplot(x)
+```
+```{r}
+stem(x)
+```
+
+# The first line creates the function crazy and gives it one argument, num, that is the sample size that will end the sequence. Line 2 makes an empty vector, x, that will be used to store the sample means. Line 3 generates n random Cauchy variates [rcauchy(n)], finds the mean of those values, and puts the result into x[n], the n-th value of x. The process is repeated in a “do loop” num times so that x[1] is the sample mean from a sample of size one, x[2] is the sample mean from a sample of size two, and so on, until finally, x[num] is the sample mean from a sample of size num. After the do loop is complete, the fourth line generates a graphic (see Figure R.1). The fifth line closes the function
+```{r}
+crazy <- function(num) {
+ x <- c()
+ for (n in 1:num) { x[n] <- mean(rcauchy(n)) }
+ plot(x, type="l", xlab="sample size", ylab="sample mean")
+ }
+```
+# use crazy ending with sample of size of 200, type
+```{r}
+crazy(200)
+```
+```{r}
+
 ```

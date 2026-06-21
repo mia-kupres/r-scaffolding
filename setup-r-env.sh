@@ -77,7 +77,8 @@ dir.create(vscode_dir, showWarnings = FALSE)
 
 settings_path <- file.path(vscode_dir, "settings.json")
 settings <- '{
-  "r.rterm.windows": "R.exe",
+   "r.rterm.windows": "C:\\Program Files\\R\\R-4.5.2\\bin\\x64\\R.exe",
+  "r.rpath.windows": "C:\\Program Files\\R\\R-4.5.2\\bin\\x64\\R.exe",
   "r.rterm.linux": "R",
   "r.rterm.mac": "R",
   "r.alwaysUseActiveTerminal": true,
