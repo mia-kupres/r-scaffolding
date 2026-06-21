@@ -33,3 +33,6 @@ renv/staging/
 Thumbs.db
 *.swp
 *.tmp
+
+/.quarto/
+**/*.quarto_ipynb

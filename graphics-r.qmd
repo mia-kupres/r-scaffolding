@@ -1,0 +1,81 @@
+# R.4.1 Graphics
+##### We introduced some graphics without saying much about it. Many hipsters use the graphics package ggplot2 for producing fabulous graphics, but for quick and easy graphing of time series, the R base graphics does fine. As seen in Chapter 1, a time series may be plotted in a few lines, such as
+```{r}
+library(astsa)
+data(gtemp_both)
+plot(gtemp_both)
+exists("gtemp_both")
+```
+
+##### in Example 1.2, or the multifigure plot
+```{r}
+plot.ts( cbind(soi, rec) )
+```
+##### which we made little fancier in Example 1.4:
+##### R.4 Time Series Primer 177
+```{r}
+par(mfrow = c(2,1))
+plot(soi, ylab='', xlab='', main='Southern Oscillation Index')
+plot(rec, ylab='', xlab='', main='Recruitment')
+```
+
+##### But, if you compare the results of the above to what is displayed in the text, there is a slight difference because we improved the aesthetics by adding a grid and cutting down on the margins. This is how we actually produced Figure 1.3:
+
+```{r}
+# dev.new(width=7, height=4) # default is 7 x 7 inches
+png(file="gtemp.png", width=480, height=360)
+par(mar=c(3,3,1,1), mgp=c(1.6,.6,0) ) # change the margins (?par)
+plot(gtemp_both, type='n')
+grid(lty=1, col=gray(.9))
+lines(gtemp_both, type='o')
+# dev.off()
+```
+
+##### For plotting many time series, plot.ts and ts.plot are available. If the series are all on the same scale, it might be useful to do the following:
+```{r}
+ts.plot(cmort, tempr, part, col=2:4)
+legend('topright', legend=c('M','T','P'), lty=1, col=2:4)
+# This produces a plot of all three series on the same axes with different colors, and then adds a legend.
+```
+
+#####  We are not restricted to using basic colors; an internet search on ‘R colors’ is helpful. The following code gives separate plots of each different series (with a limit of 10):
+```{r}
+plot.ts(cbind(cmort, tempr, part) )
+plot.ts(eqexp) # you will get a warning
+plot.ts(eqexp[,9:16], main='Explosions') # but this works
+```
+
+##### Here’s the code we used to plot two series individually in Figure 1.5:
+```{r}
+dev.new(width=7, height=6)
+par(mfrow = c(2,1), mar=c(2,2,1,0)+.5, mgp=c(1.6,.6,0) )
+plot(soi, ylab='', xlab='', main='Southern Oscillation Index', type='n')
+grid(lty=1, col=gray(.9))
+lines(soi)
+plot(rec, ylab='', main='Recruitment', type='n')
+grid(lty=1, col=gray(.9))
+lines(rec)
+```
+
+##### Finally, we mention that size matters when plotting time series. Figure R.2 shows the sunspot numbers discussed in Problem 4.6 plotted with varying dimension size as follows.
+```{r}
+layout(matrix(c(1:2, 1:2), ncol=2), height=c(.2,.8))
+par(mar=c(.2,3.5,0,.5), oma=c(3.5,0,.5,0), mgp=c(2,.6,0), tcl=-.3, las=1)
+plot(sunspotz, type='n', xaxt='no', ylab='')
+grid(lty=1, col=gray(.9))
+lines(sunspotz)
+plot(sunspotz, type='n', ylab='')
+grid(lty=1, col=gray(.9))
+lines(sunspotz)
+title(xlab="Time", outer=TRUE, cex.lab=1.2)
+mtext(side=2, "Sunspot Numbers", line=2, las=0, adj=.75)
+```
+##### The result is shown in Figure R.2. The top plot is wide and narrow, revealing the fact that the series rises quickly and falls slowly. The bottom plot, which is more square, obscures this fact. You will notice that in the main part of the text, we never plotted a series in a square box. The ideal shape for plotting time series, in most instances, is when the time axis is much wider than the value axis.
+
+##### Figuring out current directory.
+```{r}
+dev.cur()
+getwd()
+list.files(pattern = "\\.pdf$")
+file.exists("Rplots.pdf")
+```
